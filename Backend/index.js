@@ -3,6 +3,7 @@ const express   = require('express');
 const cors      = require('cors');
 const connectDB = require('./config/db');
 const allRoutes = require('./routes');
+const userRoutes = require('./routes/userRoutes');
 
 // ◀ Importa o router de bootstrap
 const bootstrap = require('./routes/bootstrap');
@@ -15,7 +16,8 @@ app.use(express.json());
 
 // Health check
 app.get('/health', (_, res) => res.sendStatus(200));
-
+// Rotas de utilizadores (admin tenant)
+app.use('/api/users', userRoutes);
 // ◀ Endpoint Bootstrap (use apenas uma vez)
 app.use('/bootstrap', bootstrap);
 
